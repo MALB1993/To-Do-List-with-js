@@ -12,5 +12,8 @@
     "web development"
   ],
   "author": "@MALB1993",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
 }
