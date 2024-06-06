@@ -1,0 +1,18 @@
+#form {
+    border: 1px solid #00000031;
+    padding: 13px;
+    border-radius: 13px;
+    background-color: #ffffff;
+    h3 {
+        border-bottom: 1px solid #ff0000;
+    }
+    #task-structure{
+        position: relative;
+        display: flex;
+        #btn-task{
+            position: absolute;
+            right: 6px;
+            top: 3px;
+        }
+    }
+}

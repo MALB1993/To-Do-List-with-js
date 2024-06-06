@@ -13,15 +13,39 @@
 
 <body>
 
+    <!-- container structure -->
     <section class="container">
+        <!-- row structure -->
         <div class="row">
             <div class="col-lg-12 col-md-8 col-sm-12 p-2 my-2">
+                <!-- form for create mew task -->
                 <form id="form">
-                    <input type="text" name="task" id="task" class="form-control border-dark">
+                    <!-- title -->
+                    <h3>Task Manager</h3>
+
+                    <!-- added new id #task-structure for inline input and button to style file -->
+                    <div id="task-structure">
+                        <!-- input task  -->
+                        <input type="text" name="task" id="task" class="form-control border-dark" placeholder="Please added new task ... ." autofocus="true"/>
+                        <!-- added new id #create-new-task for create style : inline -->
+                        <button type="submit" id="btn-task" class="btn btn-sm btn-dark">
+                            <i class="bi bi-journal-plus"></i>
+                        </button>
+                        <!-- validated message for task input if everything is ok return empty -->
+                        <strong class="text-danger">
+                            <!-- added small tag for resize message and added id for error handling script side-->
+                            <small id="messages"></small>
+                        </strong>
+                        <!-- /validated message for task input if everything is ok return empty -->
+                    </div>
+                    <!-- /added new id #task-structure for inline input and button to style file -->
                 </form>
+                <!-- /form for create mew task -->
             </div>
         </div>
+        <!-- /row structure -->
     </section>
+    <!-- /container structure -->
 
     <!-- scripts -->
     <script src="./assets/js/script.js"></script>

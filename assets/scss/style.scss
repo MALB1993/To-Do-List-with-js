@@ -1,5 +1,5 @@
 @import "./../../node_modules/bootstrap/scss/bootstrap.scss";
-
+@import "./../../node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
 // import variables _file
 @import "variables.scss";
 // import google font 
@@ -10,5 +10,7 @@ body {
     @extend %font-body;
     @extend %reset-style;
     background-color: $background_default_color;
-    
 }
+
+
+@import "./components/parent_form";
