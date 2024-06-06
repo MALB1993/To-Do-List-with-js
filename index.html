@@ -24,13 +24,15 @@
                     <h3>Task Manager</h3>
 
                     <!-- added new id #task-structure for inline input and button to style file -->
-                    <div id="task-structure">
-                        <!-- input task  -->
-                        <input type="text" name="task" id="task" class="form-control border-dark" placeholder="Please added new task ... ." autofocus="true"/>
-                        <!-- added new id #create-new-task for create style : inline -->
-                        <button type="submit" id="btn-task" class="btn btn-sm btn-dark">
-                            <i class="bi bi-journal-plus"></i>
-                        </button>
+                    <div>
+                        <div id="task-structure">
+                            <!-- input task  -->
+                            <input type="text" name="task" id="task" class="form-control border-dark" placeholder="Please added new task ... ." autofocus="true"/>
+                            <!-- added new id #create-new-task for create style : inline -->
+                            <button type="submit" id="btn-task" class="btn btn-sm btn-dark">
+                                <i class="bi bi-journal-plus"></i>
+                            </button>
+                        </div>
                         <!-- validated message for task input if everything is ok return empty -->
                         <strong class="text-danger">
                             <!-- added small tag for resize message and added id for error handling script side-->
