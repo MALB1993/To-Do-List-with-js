@@ -4,7 +4,8 @@
   "description": "This project is a simple ToDo List application. It allows users to manage their tasks efficiently by adding, editing, and deleting tasks. The application is built using modern web technologies such as HTML, CSS, JavaScript, Sass, and Bootstrap. The goal of this project is to provide a basic yet functional ToDo List app that can be easily customized and expanded upon. Whether you are looking to learn about web development or just need a simple tool to keep track of your tasks, this project is a great starting point.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch assets/scss:assets/css"
   },
   "keywords": [
     "To Do List",
