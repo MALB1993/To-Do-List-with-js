@@ -1,1 +1,14 @@
 @import "./../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// import variables _file
+@import "variables.scss";
+// import google font 
+@import "fonts.scss";
+
+
+body {
+    @extend %font-body;
+    @extend %reset-style;
+    background-color: $background_default_color;
+    
+}
