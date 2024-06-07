@@ -1,53 +1,103 @@
-//----------- for input form by name : task
+// Get HTML elements
 const taskStructure = document.getElementById("task-structure");
 const task = document.getElementById("task");
 const taskButton = document.getElementById("btn-task");
 const form = document.getElementById("form");
 const messages = document.getElementById("messages");
-// create element
+const clearItems = document.getElementById("clear-items");
+// Create task list
 const ul = document.createElement("ul");
 ul.classList.add("list-group", "list-group-numbered");
 form.appendChild(ul);
 
-// create new task
-function createTaskItem() {
-    const validInput = false;
-    if (task.value === "") {
-        messages.textContent = "The input cannot be empty."
+// Function to validate the form
+function validateForm() {
+    const taskValue = task.value.trim(); // Remove extra spaces
+
+    if (taskValue === "") {
+        messages.textContent = "The input cannot be empty.";
         task.classList.add("is-invalid");
-        return;
-    } else if (task.value.length <= 3) {
-        messages.textContent = "The input must contain at least 3 words."
-        task.classList.add("is-invalid");
-        return;
-    } else if (task.value.length >= 1001) {
-        messages.textContent = "The input must not exceed 1000 words."
-        task.classList.add("is-invalid");
-        return;
-    } else {
-        validInput = true;
+        return false;
     }
-    
-    if (validInput === true) {
-        // Create list elements and add it to the form
+
+    const wordCount = taskValue.length;
+
+    if (wordCount < 3) {
+        messages.textContent = "The input must contain at least 3 words.";
+        task.classList.add("is-invalid");
+        return false;
+    } else if (wordCount > 1000) {
+        messages.textContent = "The input must not exceed 1000 words.";
+        task.classList.add("is-invalid");
+        return false;
+    }
+
+    task.classList.remove("is-invalid");
+    messages.textContent = "";
+    return true;
+}
+
+// Function to create a new task
+function createTaskItem() {
+    const isValid = validateForm();
+    if (isValid) {
+        const taskValue = task.value.trim(); // Remove extra spaces again just to be sure
         const li = document.createElement("li");
         li.classList.add("list-group-item", "my-1");
+        li.textContent = taskValue;
         ul.appendChild(li);
-        // Add input value as desired text
-        li.textContent = task.value;
+
+        // Get existing tasks from localStorage
+        const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        existingTasks.push(taskValue);
+
+        // Save updated tasks to localStorage
+        localStorage.setItem('tasks', JSON.stringify(existingTasks));
+
         // Clear the input value after adding to the list
         task.value = "";
     }
 }
 
-
-
-
-// events
-
+// Click event for task button
 taskButton.addEventListener("click", (evt) => {
-    evt.preventDefault()
+    evt.preventDefault();
     createTaskItem();
 });
 
-window.addEventListener("keypress", (evt) => evt.key === "Enter" ? createTaskItem : "");
+// Enter key event to create a task
+document.addEventListener("keypress", (evt) => {
+    if (evt.key === "Enter") {
+        evt.preventDefault();
+        createTaskItem();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    if (storedTasks.length !== 0) {
+        storedTasks.forEach(task => {
+            const li = document.createElement("li");
+            const i = document.createElement('i');
+
+            li.classList.add("list-group-item", "my-1");
+            li.textContent = task;
+
+            ul.appendChild(li);
+        });
+    }
+});
+
+clearItems.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    const getItems = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    
+    if (getItems.length >= 1) {
+        localStorage.clear('tasks');
+        while (ul.firstChild) {
+            ul.removeChild(ul.firstChild);
+        }
+    }
+
+});

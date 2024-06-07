@@ -21,13 +21,15 @@
                 <!-- form for create mew task -->
                 <form id="form">
                     <!-- title -->
-                    <h3>Task Manager</h3>
-
+                    <div class="d-flex justify-content-between my-4">
+                        <h3>Task Manager</h3>
+                        <button class="btn btn-sm btn-dark" id="clear-items"> Clear all items</button>
+                    </div>
                     <!-- added new id #task-structure for inline input and button to style file -->
                     <div>
                         <div id="task-structure">
                             <!-- input task  -->
-                            <input type="text" name="task" id="task" class="form-control border-dark" placeholder="Please added new task ... ." autofocus="true"/>
+                            <input type="text" name="task" id="task" class="form-control" placeholder="Please added new task ... ." autofocus="true"/>
                             <!-- added new id #create-new-task for create style : inline -->
                             <button type="submit" id="btn-task" class="btn btn-sm btn-dark">
                                 <i class="bi bi-journal-plus"></i>
