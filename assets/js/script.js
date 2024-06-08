@@ -43,8 +43,14 @@ function createTaskItem() {
     if (isValid) {
         const taskValue = task.value.trim(); // Remove extra spaces again just to be sure
         const li = document.createElement("li");
-        li.classList.add("list-group-item", "my-1");
+        li.classList.add("list-group-item", "my-2", "border-primary");
         li.textContent = taskValue;
+        const i = document.createElement('i');
+        i.classList.add("bi","bi-trash", "remove-task");
+        i.style.float = "right";
+        i.style.color = "#ff0000"
+        i.style.cursor = "pointer";
+        li.appendChild(i);
         ul.appendChild(li);
 
         // Get existing tasks from localStorage
@@ -78,12 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (storedTasks.length !== 0) {
         storedTasks.forEach(task => {
             const li = document.createElement("li");
-            const i = document.createElement('i');
-
-            li.classList.add("list-group-item", "my-1");
+            li.classList.add("list-group-item", "my-2", "border-primary");
             li.textContent = task;
 
+            const i = document.createElement('i');
+            i.classList.add("bi","bi-trash", "remove-task");
+            i.style.float = "right";
+            i.style.color = "#ff0000"
+            i.style.cursor = "pointer";
+            li.appendChild(i);
             ul.appendChild(li);
+
+            
+
         });
     }
 });
