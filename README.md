@@ -17,3 +17,33 @@ To run this project, you only need a web browser and a text editor. No additiona
 3. To delete items, click the delete button next to each item.
 
 ## File Structure
+
+.
+├── index.html
+├── assets/css/styles.css
+├── assets/scss/style.scss
+└── assets/js/script.js
+
+
+### index.html
+This file contains the basic HTML structure for displaying the two lists and the forms for adding items.
+
+### styles.css
+This file contains the styles for the appearance of the application.
+
+### script.js
+This file contains the JavaScript code for adding, deleting, and validating items.
+
+## How It Works
+1. **Adding Items**: When a user enters an item and clicks the add button, the JavaScript checks that the input is not empty and the item is not a duplicate. Then, the item is added to the appropriate list.
+2. **Deleting Items**: Each item in the list has a delete button. Clicking this button removes the item from the list.
+3. **Input Validation**: The JavaScript ensures that user inputs are not empty and items are not duplicated to prevent invalid entries.
+
+## Contribution
+If you would like to contribute to this project, you can fork this repository and submit a pull request with your suggestions and improvements.
+
+## License
+This project is licensed under the MIT License. For more details, please refer to the `LICENSE` file.
+
+## Author
+- [Mostafa_Alaeddin](https://github.com/MALB1993)
