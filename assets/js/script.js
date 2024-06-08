@@ -23,11 +23,11 @@ function validateForm() {
     const wordCount = taskValue.length;
 
     if (wordCount < 3) {
-        messages.textContent = "The input must contain at least 3 words.";
+        messages.textContent = "The input must contain at least 3 characters.";
         task.classList.add("is-invalid");
         return false;
     } else if (wordCount > 1000) {
-        messages.textContent = "The input must not exceed 1000 words.";
+        messages.textContent = "The input must not exceed 1000 characters.";
         task.classList.add("is-invalid");
         return false;
     }
@@ -42,27 +42,51 @@ function createTaskItem() {
     const isValid = validateForm();
     if (isValid) {
         const taskValue = task.value.trim(); // Remove extra spaces again just to be sure
+
+        // Get existing tasks from localStorage
+        const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        
+        // Check for duplicate
+        if (existingTasks.includes(taskValue)) {
+            messages.textContent = "The task already exists.";
+            task.classList.add("is-invalid");
+            return;
+        }
+
         const li = document.createElement("li");
         li.classList.add("list-group-item", "my-2", "border-primary");
         li.textContent = taskValue;
         const i = document.createElement('i');
         i.classList.add("bi","bi-trash", "remove-task");
         i.style.float = "right";
-        i.style.color = "#ff0000"
+        i.style.color = "#ff0000";
         i.style.cursor = "pointer";
+        i.addEventListener("click", removeTask);
         li.appendChild(i);
         ul.appendChild(li);
 
-        // Get existing tasks from localStorage
-        const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        existingTasks.push(taskValue);
-
         // Save updated tasks to localStorage
+        existingTasks.push(taskValue);
         localStorage.setItem('tasks', JSON.stringify(existingTasks));
 
         // Clear the input value after adding to the list
         task.value = "";
+        messages.textContent = ""; // Clear any previous messages
     }
+}
+
+// Function to remove a task
+function removeTask(evt) {
+    const taskItem = evt.target.parentElement;
+    const taskValue = taskItem.textContent.trim();
+
+    // Remove from DOM
+    taskItem.remove();
+
+    // Remove from localStorage
+    const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const updatedTasks = existingTasks.filter(task => task !== taskValue);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 }
 
 // Click event for task button
@@ -90,13 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const i = document.createElement('i');
             i.classList.add("bi","bi-trash", "remove-task");
             i.style.float = "right";
-            i.style.color = "#ff0000"
+            i.style.color = "#ff0000";
             i.style.cursor = "pointer";
+            i.addEventListener("click", removeTask);
             li.appendChild(i);
             ul.appendChild(li);
-
-            
-
         });
     }
 });
@@ -105,12 +127,11 @@ clearItems.addEventListener('click', (evt) => {
     evt.preventDefault();
     const getItems = JSON.parse(localStorage.getItem('tasks')) || [];
     
-    
     if (getItems.length >= 1) {
         localStorage.clear('tasks');
         while (ul.firstChild) {
             ul.removeChild(ul.firstChild);
+            task.value = "";
         }
     }
-
 });
